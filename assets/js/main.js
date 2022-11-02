@@ -3,8 +3,8 @@ let gridContainer = document.getElementById('griglia');
 let bombsArray = [];
 
 
-
-while (bombsArray.length < 16) {
+function myFunction() {
+ while (bombsArray.length < 16) {
     let randomBombNumber = Math.round(Math.random() * (100-1)) +1;
 
     if (bombsArray.includes (randomBombNumber)) {
@@ -24,7 +24,7 @@ function creaQuadrato(num) {
 
     if (bombsArray.includes(i)){
         div.innerText = num;
-        div.classList.toggle("bg-danger")
+        
     }
 
     else {
@@ -38,17 +38,30 @@ function creaQuadrato(num) {
 
     for(i = 1; i <= 100; i++){ 
 
-     let quadrato = creaQuadrato(i);
-     quadrato.addEventListener("click", function attivaQuadrato(){
-        console.log(this);
-        this.classList.toggle("bg-primary")
+     let quadrato = creaQuadrato(i); // ok
+     if(bombsArray.includes(i)){
 
-        if(bombsArray.includes(i)){
-
-          
-        }
-
+        quadrato.addEventListener("click", 
+        function creaQuadrato(){
+            
+            this.classList.toggle("bg-danger")
+            if(!alert('Peccato :( hai perso! schiaccia ok per giocare ancora'))
+            
+            {window.location.reload();}
         })
+
+    }
+
+    else{
+        
+        quadrato.addEventListener("click", 
+        function creaQuadrato(){
+            
+            this.classList.toggle("bg-primary")
+            
+        })
+
+    }
      
         console.log(quadrato.innerText);
 
@@ -60,3 +73,4 @@ function creaQuadrato(num) {
     
 
 
+    }
